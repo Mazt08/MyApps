@@ -1,0 +1,27 @@
+/* Align theme with Home */
+.history-content {
+  --background: linear-gradient(180deg, #f5afd2 0%, #e77fae 100%);
+  font-family: "Playfair Display", serif;
+}
+
+.history-card {
+  background: #ffd1f1;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(211, 107, 138, 0.15);
+  padding: 20px;
+}
+
+h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #d36b8a;
+}
+
+p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #444;
+}

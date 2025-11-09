@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cart</ion-title>
+  </ion-toolbar>
+  <div class="select-bar" *ngIf="!isEmpty">
+    <ion-checkbox
+      [checked]="allSelected"
+      (ionChange)="toggleAll($event.detail.checked)"
+      labelPlacement="end"
+      >Select All</ion-checkbox
+    >
+    <ion-button
+      size="small"
+      fill="clear"
+      color="danger"
+      (click)="removeSelected()"
+      [disabled]="!selectedTotal()"
+    >
+      Remove
+    </ion-button>
+  </div>
+</ion-header>
+
+<ion-content class="cart-content ion-padding">
+  <div *ngIf="isEmpty" class="empty">
+    <h2>Your cart is empty</h2>
+    <p>Add a perfume to start your collection.</p>
+  </div>
+
+  <ion-list *ngIf="!isEmpty">
+    <ion-item *ngFor="let item of items" class="cart-item">
+      <ion-checkbox
+        slot="start"
+        [checked]="isSelected(item.name)"
+        (ionChange)="toggleOne(item.name, $event.detail.checked)"
+      ></ion-checkbox>
+      <ion-thumbnail slot="start">
+        <ion-img [src]="imageOf(item.name)" alt="{{ item.name }}"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>{{ item.name }}</h3>
+        <p class="unit-price">
+          ₱{{ priceOf(item.name) | number:'1.0-0' }} each
+        </p>
+        <div class="qty-row" aria-label="Quantity controls for {{ item.name }}">
+          <ion-button
+            size="small"
+            fill="solid"
+            color="tertiary"
+            (click)="dec(item.name)"
+            >-</ion-button
+          >
+          <span class="qty">{{ item.qty }}</span>
+          <ion-button
+            size="small"
+            fill="solid"
+            color="tertiary"
+            (click)="inc(item.name)"
+            >+</ion-button
+          >
+        </div>
+        <div class="line-subtotal" aria-label="Subtotal for {{ item.name }}">
+          ₱{{ lineTotal(item) | number:'1.0-0' }}
+        </div>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button
+          size="small"
+          fill="clear"
+          color="danger"
+          (click)="remove(item.name)"
+          aria-label="Remove {{ item.name }} from cart"
+        >
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+  <ion-footer *ngIf="!isEmpty" class="ion-padding footer-actions">
+    <div class="checkout-bar always" aria-label="Cart summary and actions">
+      <div class="summary-block">
+        <div class="summary-row">
+          <span>Items</span
+          ><strong>₱{{ selectedTotal() | number:'1.0-0' }}</strong>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span
+          ><strong>₱{{ shippingEstimate() | number:'1.0-0' }}</strong>
+        </div>
+        <div class="summary-row grand">
+          <span>Total</span
+          ><strong>₱{{ totalWithShipping() | number:'1.0-0' }}</strong>
+        </div>
+      </div>
+      <div class="actions">
+        <ion-button size="small" color="medium" (click)="clear()" fill="outline"
+          >Clear</ion-button
+        >
+        <ion-button
+          size="small"
+          color="danger"
+          (click)="checkout()"
+          [disabled]="!selectedTotal()"
+          >Checkout</ion-button
+        >
+      </div>
+    </div>
+  </ion-footer>
+</ion-content>

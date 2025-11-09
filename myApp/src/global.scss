@@ -1,0 +1,20 @@
+/* Global styles */
+
+/* Unified pink gradient header (matches cart page theme) */
+ion-toolbar {
+  --background: linear-gradient(90deg, #f5afd2 0%, #e77fae 100%);
+  --color: #111;
+  box-shadow: 0 4px 12px rgba(211, 107, 138, 0.25);
+  font-family: "Playfair Display", serif;
+}
+
+ion-header ion-title {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Ensure translucent headers still show gradient */
+ion-header.translucent ion-toolbar {
+  --background: linear-gradient(90deg, #f5afd2 0%, #e77fae 100%);
+  backdrop-filter: none;
+}

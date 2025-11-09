@@ -1,0 +1,73 @@
+.perfume-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  // Style the image
+  .modal-image {
+    width: 60%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 10px;
+    margin: 1rem auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  // Product name
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #222;
+    margin-top: 0.5rem;
+  }
+
+  // Price
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--ion-color-tertiary);
+    margin-bottom: 0.75rem;
+  }
+
+  // Description text
+  p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  // Add to cart button
+  ion-button {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    --color: #222;
+  }
+}
+
+// Header styling
+ion-header {
+  ion-toolbar {
+    --background: #f9f9f9;
+    --color: #222;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+    ion-title {
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    ion-button {
+      font-size: 0.9rem;
+    }
+  }
+}

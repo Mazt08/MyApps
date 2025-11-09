@@ -1,0 +1,25 @@
+/* Match the pink theme used across the app */
+.about-content {
+  --background: linear-gradient(180deg, #f5afd2 0%, #e77fae 100%);
+  font-family: "Playfair Display", serif;
+}
+
+.card {
+  background: #ffd1f1;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(211, 107, 138, 0.15);
+  padding: 20px;
+}
+
+h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  color: #d36b8a;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-family: "Montserrat", sans-serif;
+  color: #444;
+  line-height: 1.6;
+}

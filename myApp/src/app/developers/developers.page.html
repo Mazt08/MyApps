@@ -1,0 +1,38 @@
+<ion-header>
+  <!-- Removed color="light" so custom pink gradient from .dev-header shows -->
+  <ion-toolbar class="dev-header">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <div class="title-block">
+      <h1 class="brand">Amouré Perfume</h1>
+      <span class="subtitle">Developers</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="developers-content ion-padding">
+  <div class="intro">
+    <h2>Crafted with Passion</h2>
+    <p>Meet the small team behind Amouré Perfume.</p>
+  </div>
+
+  <div class="dev-grid">
+    <ion-card *ngFor="let d of devs" class="dev-card">
+      <ion-card-header>
+        <div class="avatar-wrap">
+          <ion-avatar class="dev-avatar">
+            <ion-img [src]="d.photo" alt="{{ d.name }}"></ion-img>
+          </ion-avatar>
+        </div>
+        <ion-card-title>{{ d.name }}</ion-card-title>
+        <p class="role">{{ d.role }}</p>
+      </ion-card-header>
+      <ion-card-content>
+        <p class="bio">
+          Dedicated to delivering a delightful fragrance experience.
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,17 @@
+    <ion-header translucent="true">
+      <ion-toolbar color="light">
+        <ion-title>{{ perfume.name }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="dark" (click)="dismiss()">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding perfume-modal">
+      <img [src]="perfume.image" alt="{{ perfume.name }}" class="modal-image" />
+      <h2>{{ perfume.name }}</h2>
+      <h3>{{ perfume.price }}</h3>
+      <p>{{ perfume.description }}</p>
+      <ion-button color="tertiary" expand="block" fill="solid" (click)="addToCart(perfume.name)">
+        Add to Cart
+      </ion-button>
+    </ion-content>

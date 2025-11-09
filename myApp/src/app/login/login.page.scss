@@ -1,0 +1,60 @@
+.auth {
+  --background: linear-gradient(180deg, #ffe0ec 0%, #ffffff 50%);
+}
+
+.header-hero {
+  padding: 48px 24px 12px;
+  text-align: center;
+  color: #b0005a;
+}
+.header-hero h1 {
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+.header-hero p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.auth-card {
+  padding: 16px;
+  max-width: 520px;
+  margin: 8px auto 24px;
+}
+.auth ion-segment {
+  margin: 8px 0 16px;
+}
+ion-list {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px rgba(255, 99, 155, 0.12);
+  overflow: hidden;
+}
+ion-item {
+  --padding-start: 14px;
+  --inner-padding-end: 6px;
+}
+ion-item ion-icon {
+  color: #ff5da2;
+}
+ion-button {
+  --border-radius: 14px;
+  --box-shadow: 0 6px 15px rgba(255, 99, 155, 0.25);
+  --background: linear-gradient(90deg, #ff5da2, #ffc107, #ff8bb0);
+  margin-top: 14px;
+}
+ion-note {
+  display: block;
+  margin: 6px 2px 0;
+}
+.switch-text {
+  margin: 12px 0 0;
+  text-align: center;
+  color: #6b6b6b;
+}
+.switch-text button {
+  background: none;
+  border: none;
+  color: #ff5da2;
+  font-weight: 600;
+}

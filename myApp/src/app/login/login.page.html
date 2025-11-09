@@ -1,0 +1,143 @@
+<ion-content class="auth">
+  <div class="header-hero">
+    <h1>{{ mode === 'login' ? 'Welcome back' : 'Create account' }}</h1>
+    <p>
+      {{ mode === 'login' ? 'Log in to continue your shopping' : 'Join us and
+      start exploring' }}
+    </p>
+  </div>
+
+  <div class="auth-card">
+    <ion-segment [value]="mode" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="login"
+        ><ion-label>Login</ion-label></ion-segment-button
+      >
+      <ion-segment-button value="signup"
+        ><ion-label>Sign Up</ion-label></ion-segment-button
+      >
+    </ion-segment>
+
+    <!-- Login Form -->
+    <form
+      *ngIf="mode==='login'"
+      [formGroup]="loginForm"
+      (ngSubmit)="submitLogin()"
+    >
+      <ion-list lines="full">
+        <ion-item>
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input
+            [type]="passwordVisibleLogin ? 'text' : 'password'"
+            placeholder="Password"
+            formControlName="password"
+          ></ion-input>
+          <ion-button
+            fill="clear"
+            slot="end"
+            (click)="$event.preventDefault(); passwordVisibleLogin=!passwordVisibleLogin"
+          >
+            <ion-icon
+              [name]="passwordVisibleLogin ? 'eye-off-outline' : 'eye-outline'"
+            ></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-note color="danger" *ngIf="lf.email.touched && lf.email.invalid"
+        >Valid email is required.</ion-note
+      >
+      <ion-note
+        color="danger"
+        *ngIf="lf.password.touched && lf.password.invalid"
+        >Password is required (min 4 chars).</ion-note
+      >
+      <ion-button expand="block" type="submit" [disabled]="loginForm.invalid"
+        >Login</ion-button
+      >
+      <div class="switch-text">
+        <span>New here?</span>
+        <button type="button" (click)="mode='signup'">Create an account</button>
+      </div>
+    </form>
+
+    <!-- Signup Form -->
+    <form
+      *ngIf="mode==='signup'"
+      [formGroup]="signupForm"
+      (ngSubmit)="submitSignup()"
+    >
+      <ion-list lines="full">
+        <ion-item>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input
+            type="text"
+            placeholder="Full name"
+            formControlName="name"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          <ion-input
+            type="tel"
+            placeholder="Phone"
+            inputmode="tel"
+            formControlName="phone"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input
+            [type]="passwordVisibleSignup ? 'text' : 'password'"
+            placeholder="Password"
+            formControlName="password"
+          ></ion-input>
+          <ion-button
+            fill="clear"
+            slot="end"
+            (click)="$event.preventDefault(); passwordVisibleSignup=!passwordVisibleSignup"
+          >
+            <ion-icon
+              [name]="passwordVisibleSignup ? 'eye-off-outline' : 'eye-outline'"
+            ></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-note color="danger" *ngIf="sf.name.touched && sf.name.invalid"
+        >Name is required.</ion-note
+      >
+      <ion-note color="danger" *ngIf="sf.phone.touched && sf.phone.invalid"
+        >Phone is required.</ion-note
+      >
+      <ion-note color="danger" *ngIf="sf.email.touched && sf.email.invalid"
+        >Valid email is required.</ion-note
+      >
+      <ion-note
+        color="danger"
+        *ngIf="sf.password.touched && sf.password.invalid"
+        >Password is required (min 4 chars).</ion-note
+      >
+      <ion-button expand="block" type="submit" [disabled]="signupForm.invalid"
+        >Create Account</ion-button
+      >
+      <div class="switch-text">
+        <span>Already have an account?</span>
+        <button type="button" (click)="mode='login'">Login</button>
+      </div>
+    </form>
+  </div>
+</ion-content>

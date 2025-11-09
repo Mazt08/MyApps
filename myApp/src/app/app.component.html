@@ -1,0 +1,115 @@
+<ion-app>
+  <!-- Side Menu -->
+  <ion-menu menuId="main-menu" contentId="main">
+    <ion-content>
+      <div class="menu-header-bg"></div>
+
+      <div class="header-content">
+        <!-- User Profile (only when not guest) -->
+        <div class="developer" *ngIf="!isGuest; else guestHeader">
+          <ion-avatar class="profile-avatar">
+            <img
+              [src]="user?.avatarUrl || 'assets/icon/jay.png'"
+              (error)="useDefaultAvatar($event)"
+              [alt]="user?.name || 'User'"
+            />
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ user?.name }}</h2>
+            <p class="user-number">{{ user?.phone || user?.email }}</p>
+          </ion-label>
+          <ion-button
+            size="small"
+            fill="clear"
+            color="light"
+            (click)="editProfile()"
+          >
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+        </div>
+        <ng-template #guestHeader>
+          <div class="developer">
+            <ion-icon
+              name="person-circle-outline"
+              class="guest-avatar"
+            ></ion-icon>
+            <ion-label>
+              <h2>Guest</h2>
+              <p class="user-number">Sign in to personalize</p>
+            </ion-label>
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="action-button" *ngIf="isGuest">
+        <ion-button routerLink="/login">
+          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+          Sign In / Register
+        </ion-button>
+      </div>
+
+      <ion-list class="menu-items" lines="none">
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
+            (click)="navigate('/home')"
+            [class.active]="isActive('/home')"
+          >
+            <ion-icon name="home-outline" slot="start"></ion-icon>
+            Home
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
+            (click)="navigate('/about')"
+            [class.active]="isActive('/about')"
+          >
+            <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+            About
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
+            (click)="navigate('/company-history')"
+            [class.active]="isActive('/company-history')"
+          >
+            <ion-icon name="business-outline" slot="start"></ion-icon>
+            Company History
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
+            (click)="navigate('/developers')"
+            [class.active]="isActive('/developers')"
+          >
+            <ion-icon name="people-outline" slot="start"></ion-icon>
+            Developers
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
+            (click)="handleCart()"
+            [class.active]="isActive('/cart')"
+          >
+            <ion-icon name="cart-outline"></ion-icon>
+            Cart
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="true" *ngIf="!isGuest">
+          <ion-item button (click)="signOut()">
+            <ion-icon name="log-out-outline"></ion-icon>
+            Sign out
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Main Content -->
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

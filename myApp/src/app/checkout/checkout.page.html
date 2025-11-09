@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Checkout</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="checkout-content ion-padding">
+  <div class="summary-card">
+    <h2>Order Summary</h2>
+    <ion-list lines="none">
+      <ion-item *ngFor="let it of items">
+        <ion-label>{{ it }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Items Total</ion-label>
+        <div slot="end">₱{{ total | number:'1.0-0' }}</div>
+      </ion-item>
+      <ion-item>
+        <ion-label>Shipping</ion-label>
+        <div slot="end">₱{{ shipping | number:'1.0-0' }}</div>
+      </ion-item>
+      <ion-item class="grand">
+        <ion-label><strong>Grand Total</strong></ion-label>
+        <div slot="end"><strong>₱{{ grand | number:'1.0-0' }}</strong></div>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" color="tertiary" (click)="placeOrder()"
+      >Place Order</ion-button
+    >
+  </div>
+</ion-content>

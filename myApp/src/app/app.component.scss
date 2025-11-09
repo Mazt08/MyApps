@@ -1,0 +1,232 @@
+/* 🌸 GLOBAL SETTINGS */
+* {
+  font-family: "Playfair Display", serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(circle at top left, #fff6fa 0%, #ffe4ef 100%);
+  color: #222;
+  overflow-x: hidden;
+}
+
+/* 🌸 HEADER BACKGROUND - Glass Gradient */
+.menu-header-bg {
+  height: 320px;
+  width: 360px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 182, 203, 0.65),
+    rgba(255, 101, 154, 0.65)
+  );
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 40px 40px 60px 90px;
+  box-shadow: 0 10px 40px rgba(255, 111, 178, 0.35);
+  transform: rotate(-8deg);
+  margin-left: -12px;
+  margin-top: -120px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.menu-header-bg::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255, 255, 255, 0.35),
+    transparent 70%
+  );
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.menu-header-bg:hover {
+  transform: rotate(-8deg) scale(1.03);
+  box-shadow: 0 12px 45px rgba(255, 105, 170, 0.45);
+}
+
+/* 🌸 HEADER CONTENT */
+.header-content {
+  position: absolute;
+  top: 40px;
+  left: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+  z-index: 2;
+  color: #fff;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.profile-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  padding: 4px;
+  background: radial-gradient(circle at 30% 30%, #fff, #ffd1f1 70%);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.45), 0 0 0 7px #ff7ca3,
+    0 8px 18px rgba(255, 111, 178, 0.35);
+  margin-right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+}
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 6px rgba(255, 130, 190, 0.4));
+}
+.profile-avatar:hover {
+  transform: scale(1.08) rotate(2deg);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.55), 0 0 0 7px #ff5494,
+    0 10px 25px rgba(255, 105, 170, 0.5);
+}
+
+.header-content .developer img:hover {
+  transform: scale(1.1) rotate(3deg);
+  box-shadow: 0 0 25px rgba(255, 80, 150, 0.6);
+}
+
+.header-content .developer h2 {
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #fff;
+  letter-spacing: 0.7px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header-content .developer ion-button[fill="clear"] {
+  margin-left: 8px;
+  --padding-start: 4px;
+  --padding-end: 4px;
+}
+
+.header-content .developer .user-number {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: #ffe5ef;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+}
+
+.guest-avatar {
+  font-size: 96px;
+  color: #fff;
+  margin-right: 18px;
+  filter: drop-shadow(0 0 8px rgba(255, 130, 190, 0.5));
+}
+
+/* 🌸 ACTION BUTTON */
+.action-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px; /* raised higher */
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+/* Slightly tighter on very short screens */
+@media (max-height: 700px) {
+  .action-button {
+    margin-top: 0;
+  }
+}
+
+.action-button ion-button {
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: 0.6px;
+  --background: linear-gradient(90deg, #ff5da2, #ffc107, #ff8bb0);
+  --border-radius: 14px;
+  --box-shadow: 0 6px 15px rgba(255, 99, 155, 0.3);
+  padding: 10px 25px;
+  transition: all 0.3s ease;
+}
+
+.action-button ion-button:hover {
+  filter: brightness(1.15);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 22px rgba(255, 99, 155, 0.45);
+}
+
+/* 🌸 MENU ITEMS */
+.menu-items {
+  margin: 0;
+  padding: 10px 0;
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+}
+
+.menu-items ion-item {
+  padding: 13px 20px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.75);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.menu-items ion-item:hover {
+  background: rgba(255, 174, 212, 0.25);
+  transform: translateX(4px);
+  box-shadow: 0 5px 12px rgba(255, 0, 179, 0.15);
+}
+
+.menu-items ion-icon {
+  margin-right: 14px;
+  color: #202020;
+  font-size: 1.3rem;
+}
+
+.menu-items .active {
+  border-left: 6px solid #ff4081;
+  color: #ff4081;
+  font-weight: 600;
+  background: rgba(255, 192, 230, 0.25);
+  padding-left: 18px;
+  box-shadow: inset 0 0 10px rgba(255, 64, 129, 0.15);
+}
+
+.menu-items .active ion-icon {
+  color: #ff4081;
+  transform: scale(1.15);
+  transition: transform 0.3s ease;
+}
+
+/* 🌸 Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
