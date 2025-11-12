@@ -1,6 +1,6 @@
 .toolbar-pink {
-  --background: rgba(255, 192, 203, 0.3);
-  --backdrop-filter: blur(6px);
+  --background: var(--app-gradient-pink);
+  --backdrop-filter: none;
 }
 
 .contact-content {
@@ -12,11 +12,17 @@
   text-align: center;
   padding: 24px 8px 8px;
 }
-.hero h1 { margin: 0 0 4px; font-weight: 700; }
-.hero p { margin: 0; opacity: 0.8; }
+.hero h1 {
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+.hero p {
+  margin: 0;
+  opacity: 0.8;
+}
 
 .contact-form {
-  background: rgba(255, 192, 203, 0.12);
+  background: var(--app-surface-pink);
   border-radius: 16px;
   padding: 12px 8px;
   margin: 12px 0 20px;
@@ -37,12 +43,14 @@
 }
 
 .static-info {
-  background: rgba(255, 192, 203, 0.12);
+  background: var(--app-surface-pink);
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 24px;
 }
-.static-info h2 { margin-top: 0; }
+.static-info h2 {
+  margin-top: 0;
+}
 .static-info ul {
   list-style: none;
   padding: 0;

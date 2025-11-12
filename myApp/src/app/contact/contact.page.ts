@@ -1,6 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import {
   IonHeader,
   IonToolbar,
@@ -17,7 +22,7 @@ import {
   IonSelect,
   IonSelectOption,
   IonList,
-  IonText
+  IonText,
 } from '@ionic/angular/standalone';
 import { ToastController } from '@ionic/angular';
 
@@ -44,8 +49,8 @@ import { ToastController } from '@ionic/angular';
     IonSelect,
     IonSelectOption,
     IonList,
-    IonText
-  ]
+    IonText,
+  ],
 })
 export class ContactPage {
   private fb = inject(FormBuilder);
@@ -56,8 +61,18 @@ export class ContactPage {
     email: ['', [Validators.required, Validators.email]],
     phone: ['', [Validators.pattern(/^\+?[0-9]{7,15}$/)]],
     topic: ['general', [Validators.required]],
-    subject: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
-    message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(2000)]],
+    subject: [
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(120)],
+    ],
+    message: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(2000),
+      ],
+    ],
   });
 
   submitting = false;
@@ -84,10 +99,12 @@ export class ContactPage {
       message: 'Message sent! We will reach out soon.',
       duration: 2500,
       color: 'success',
-      position: 'top'
+      position: 'top',
     });
     toast.present();
   }
 
-  get f() { return this.form.controls; }
+  get f() {
+    return this.form.controls;
+  }
 }

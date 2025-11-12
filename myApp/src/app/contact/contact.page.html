@@ -10,27 +10,75 @@
 <ion-content class="contact-content">
   <div class="hero">
     <h1>We'd love to hear from you</h1>
-    <p>Questions, feedback, or concerns? Send us a message and we'll respond shortly.</p>
+    <p>
+      Questions, feedback, or concerns? Send us a message and we'll respond
+      shortly.
+    </p>
   </div>
 
-  <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="contact-form">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+    novalidate
+    class="contact-form"
+  >
     <ion-list lines="none">
-      <ion-item class="form-item" [class.invalid]="f['name'].touched && f['name'].invalid">
-  <ion-label position="stacked">Name <ion-text color="danger" *ngIf="f['name'].touched && f['name'].invalid">*</ion-text></ion-label>
-        <ion-input formControlName="name" autocomplete="name" placeholder="Your full name"></ion-input>
+      <ion-item
+        class="form-item"
+        [class.invalid]="f['name'].touched && f['name'].invalid"
+      >
+        <ion-label position="stacked"
+          >Name
+          <ion-text
+            color="danger"
+            *ngIf="f['name'].touched && f['name'].invalid"
+            >*</ion-text
+          ></ion-label
+        >
+        <ion-input
+          formControlName="name"
+          autocomplete="name"
+          placeholder="Your full name"
+        ></ion-input>
       </ion-item>
 
-      <ion-item class="form-item" [class.invalid]="f['email'].touched && f['email'].invalid">
-  <ion-label position="stacked">Email <ion-text color="danger" *ngIf="f['email'].touched && f['email'].invalid">*</ion-text></ion-label>
-        <ion-input formControlName="email" type="email" autocomplete="email" placeholder="you@example.com"></ion-input>
+      <ion-item
+        class="form-item"
+        [class.invalid]="f['email'].touched && f['email'].invalid"
+      >
+        <ion-label position="stacked"
+          >Email
+          <ion-text
+            color="danger"
+            *ngIf="f['email'].touched && f['email'].invalid"
+            >*</ion-text
+          ></ion-label
+        >
+        <ion-input
+          formControlName="email"
+          type="email"
+          autocomplete="email"
+          placeholder="you@example.com"
+        ></ion-input>
       </ion-item>
 
-      <ion-item class="form-item" [class.invalid]="f['phone'].touched && f['phone'].invalid">
+      <ion-item
+        class="form-item"
+        [class.invalid]="f['phone'].touched && f['phone'].invalid"
+      >
         <ion-label position="stacked">Phone (optional)</ion-label>
-        <ion-input formControlName="phone" type="tel" autocomplete="tel" placeholder="+63 900 000 0000"></ion-input>
+        <ion-input
+          formControlName="phone"
+          type="tel"
+          autocomplete="tel"
+          placeholder="+63 900 000 0000"
+        ></ion-input>
       </ion-item>
 
-      <ion-item class="form-item" [class.invalid]="f['topic'].touched && f['topic'].invalid">
+      <ion-item
+        class="form-item"
+        [class.invalid]="f['topic'].touched && f['topic'].invalid"
+      >
         <ion-label position="stacked">Topic</ion-label>
         <ion-select formControlName="topic" interface="popover">
           <ion-select-option value="general">General</ion-select-option>
@@ -40,32 +88,73 @@
         </ion-select>
       </ion-item>
 
-      <ion-item class="form-item" [class.invalid]="f['subject'].touched && f['subject'].invalid">
-  <ion-label position="stacked">Subject <ion-text color="danger" *ngIf="f['subject'].touched && f['subject'].invalid">*</ion-text></ion-label>
-        <ion-input formControlName="subject" placeholder="Short summary"></ion-input>
+      <ion-item
+        class="form-item"
+        [class.invalid]="f['subject'].touched && f['subject'].invalid"
+      >
+        <ion-label position="stacked"
+          >Subject
+          <ion-text
+            color="danger"
+            *ngIf="f['subject'].touched && f['subject'].invalid"
+            >*</ion-text
+          ></ion-label
+        >
+        <ion-input
+          formControlName="subject"
+          placeholder="Short summary"
+        ></ion-input>
       </ion-item>
 
-      <ion-item class="form-item" [class.invalid]="f['message'].touched && f['message'].invalid">
-  <ion-label position="stacked">Message <ion-text color="danger" *ngIf="f['message'].touched && f['message'].invalid">*</ion-text></ion-label>
-        <ion-textarea formControlName="message" autoGrow="true" placeholder="Type your message here..."></ion-textarea>
+      <ion-item
+        class="form-item"
+        [class.invalid]="f['message'].touched && f['message'].invalid"
+      >
+        <ion-label position="stacked"
+          >Message
+          <ion-text
+            color="danger"
+            *ngIf="f['message'].touched && f['message'].invalid"
+            >*</ion-text
+          ></ion-label
+        >
+        <ion-textarea
+          formControlName="message"
+          autoGrow="true"
+          placeholder="Type your message here..."
+        ></ion-textarea>
       </ion-item>
     </ion-list>
 
     <div class="actions">
-      <ion-button type="submit" expand="block" [disabled]="submitting || form.invalid">
+      <ion-button
+        type="submit"
+        expand="block"
+        [disabled]="submitting || form.invalid"
+      >
         <ion-icon name="send-outline" slot="start"></ion-icon>
         {{ submitting ? 'Sending...' : 'Send Message' }}
       </ion-button>
-      <p class="helper" *ngIf="submitted">Your message has been sent. Thank you!</p>
+      <p class="helper" *ngIf="submitted">
+        Your message has been sent. Thank you!
+      </p>
     </div>
   </form>
 
   <div class="static-info">
     <h2>Other Ways</h2>
     <ul>
-      <li><ion-icon name="call-outline"></ion-icon> Hotline: +63 912 345 6789</li>
-      <li><ion-icon name="mail-outline"></ion-icon> Email: support@pinkperfumes.test</li>
-      <li><ion-icon name="location-outline"></ion-icon> Address: Makati City, Philippines</li>
+      <li>
+        <ion-icon name="call-outline"></ion-icon> Hotline: +63 912 345 6789
+      </li>
+      <li>
+        <ion-icon name="mail-outline"></ion-icon> Email:
+        support@pinkperfumes.test
+      </li>
+      <li>
+        <ion-icon name="location-outline"></ion-icon> Address: Makati City,
+        Philippines
+      </li>
     </ul>
   </div>
 </ion-content>
