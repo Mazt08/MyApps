@@ -94,6 +94,16 @@
         <ion-menu-toggle auto-hide="true">
           <ion-item
             button
+            (click)="navigate('/contact')"
+            [class.active]="isActive('/contact')"
+          >
+            <ion-icon name="chatbubbles-outline" slot="start"></ion-icon>
+            Contact
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
             (click)="navigate('/developers')"
             [class.active]="isActive('/developers')"
           >

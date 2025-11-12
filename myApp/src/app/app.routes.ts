@@ -31,6 +31,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'contact',
+    loadComponent: () =>
+      import('./contact/contact.page').then((m) => m.ContactPage),
+  },
+  {
     path: 'profile-settings',
     loadComponent: () =>
       import('./profile-settings/profile-settings.page').then(
