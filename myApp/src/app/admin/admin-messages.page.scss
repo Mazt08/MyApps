@@ -1,0 +1,67 @@
+.messages-content {
+  --background: linear-gradient(180deg, #ffe6f4 0%, #f9c9e3 45%, #f3b3d6 100%);
+  padding: 10px 12px 24px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 4px 12px;
+}
+
+.msg-list {
+  background: transparent !important;
+}
+
+.msg-card {
+  margin: 10px 0;
+  border-radius: 16px;
+  background: rgba(249, 201, 227, 0.12);
+  border: 1px solid rgba(230, 160, 188, 0.35);
+  box-shadow: 0 3px 10px rgba(211, 107, 138, 0.1);
+  --padding-start: 12px;
+  --inner-padding-end: 12px;
+}
+
+.msg-card.handled {
+  opacity: 0.8;
+}
+
+.row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.who { display: flex; align-items: center; gap: 10px; }
+.who .email { color: #6b3b4e; font-size: 12px; }
+.meta { display: inline-flex; gap: 8px; align-items: center; color: #6b3b4e; font-size: 12px; }
+
+.subject {
+  margin-top: 6px;
+  font-weight: 600;
+  color: #c2185b;
+}
+
+.actions-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.message {
+  margin-top: 8px;
+  background: rgba(255, 230, 244, 0.35);
+  border: 1px solid rgba(230, 160, 188, 0.35);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.empty {
+  text-align: center;
+  margin-top: 18vh;
+  opacity: 0.9;
+}
+.empty ion-icon { font-size: 48px; color: #c2185b; }
+.empty h3 { margin: 10px 0 4px; }

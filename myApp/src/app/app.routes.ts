@@ -72,6 +72,12 @@ export const routes: Routes = [
       import('./admin/admin-reports.page').then((m) => m.AdminReportsPage),
   },
   {
+    path: 'admin/messages',
+    canMatch: [adminGuard],
+    loadComponent: () =>
+      import('./admin/admin-messages.page').then((m) => m.AdminMessagesPage),
+  },
+  {
     path: 'login',
     loadComponent: () => import('./login/login.page').then((m) => m.LoginPage),
   },

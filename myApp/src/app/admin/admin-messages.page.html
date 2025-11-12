@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="admin-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Contact Messages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="messages-content">
+  <div class="header-actions" *ngIf="messages.length > 0">
+    <ion-chip color="medium">
+      Total: <strong>&nbsp;{{ messages.length }}</strong>
+    </ion-chip>
+    <ion-chip color="success" *ngIf="hasHandled">
+      Handled: <strong>&nbsp;{{ handledCount }}</strong>
+    </ion-chip>
+    <ion-button color="danger" fill="outline" size="small" (click)="clearAll()" [disabled]="!messages.length">
+      <ion-icon name="trash-outline" slot="start"></ion-icon>
+      Clear All
+    </ion-button>
+  </div>
+
+  <ion-list class="msg-list" lines="none" *ngIf="messages.length; else empty">
+    <ng-container *ngFor="let m of messages; trackBy: trackById">
+      <ion-item class="msg-card" [class.handled]="m.handled">
+        <ion-label>
+          <div class="row-top">
+            <div class="who">
+              <strong>{{ m.name }}</strong>
+              <span class="email">{{ m.email }}</span>
+            </div>
+            <div class="meta">
+              <ion-badge [color]="m.handled ? 'success' : 'warning'">{{ m.handled ? 'Handled' : 'New' }}</ion-badge>
+              <ion-badge color="tertiary">{{ m.topic }}</ion-badge>
+              <span class="date">{{ m.createdAt | date:'MMM d, y, h:mm a' }}</span>
+            </div>
+          </div>
+          <div class="subject">{{ m.subject }}</div>
+          <div class="actions-row">
+            <ion-button size="small" (click)="toggleExpand(m.id)">
+              <ion-icon [name]="expanded[m.id] ? 'chevron-up-outline' : 'chevron-down-outline'" slot="start"></ion-icon>
+              {{ expanded[m.id] ? 'Hide' : 'View' }}
+            </ion-button>
+            <ion-button size="small" color="success" fill="outline" (click)="toggleHandled(m)">
+              <ion-icon name="checkmark-done-outline" slot="start"></ion-icon>
+              {{ m.handled ? 'Mark Unhandled' : 'Mark Handled' }}
+            </ion-button>
+            <ion-button size="small" color="danger" fill="clear" (click)="remove(m)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </div>
+          <div class="message" *ngIf="expanded[m.id]">
+            <div class="phone" *ngIf="m.phone">📞 {{ m.phone }}</div>
+            <p>{{ m.message }}</p>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+  <ng-template #empty>
+    <div class="empty">
+      <ion-icon name="mail-open-outline"></ion-icon>
+      <h3>No messages yet</h3>
+      <p>When customers submit the Contact form, they’ll appear here.</p>
+    </div>
+  </ng-template>
+</ion-content>
