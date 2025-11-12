@@ -6,12 +6,11 @@
 .contact-content {
   --padding-start: 16px;
   --padding-end: 16px;
-  /* Make the whole page background softly pink */
+  /* Lighter, subtle background to match other pages */
   --background: linear-gradient(
     180deg,
-    var(--app-surface-pink-strong) 0%,
-    rgba(255, 182, 213, 0.10) 50%,
-    var(--app-surface-pink-strong) 100%
+    rgba(255, 182, 213, 0.06) 0%,
+    rgba(255, 182, 213, 0.03) 100%
   );
 }
 
@@ -29,11 +28,12 @@
 }
 
 .contact-form {
-  background: var(--app-surface-pink-strong);
+  background: var(--app-surface-pink);
   border-radius: 16px;
   padding: 12px 8px;
   margin: 12px 0 20px;
-  border: 1px solid rgba(231, 95, 168, 0.18);
+  border: 1px solid rgba(231, 95, 168, 0.12);
+  box-shadow: 0 6px 16px rgba(231, 95, 168, 0.08);
 }
 
 .form-item.invalid {
@@ -44,6 +44,17 @@
   margin: 12px 0 8px;
 }
 
+.actions ion-button {
+  /* Lighter CTA akin to cart’s tone */
+  --background: linear-gradient(90deg, #f8b6d5 0%, #f3a7cc 100%);
+  --background-activated: linear-gradient(90deg, #f8b6d5 0%, #f3a7cc 100%);
+  --background-focused: linear-gradient(90deg, #f8b6d5 0%, #f3a7cc 100%);
+  --color: #2b0a18;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 12px rgba(231, 95, 168, 0.18);
+}
+
 .helper {
   text-align: center;
   margin-top: 8px;
@@ -51,11 +62,12 @@
 }
 
 .static-info {
-  background: var(--app-surface-pink-strong);
+  background: var(--app-surface-pink);
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 24px;
-  border: 1px solid rgba(231, 95, 168, 0.18);
+  border: 1px solid rgba(231, 95, 168, 0.12);
+  box-shadow: 0 6px 16px rgba(231, 95, 168, 0.08);
 }
 .static-info h2 {
   margin-top: 0;
@@ -70,4 +82,19 @@
   align-items: center;
   gap: 8px;
   padding: 6px 0;
+}
+
+/* Remove white backgrounds inside the form */
+.contact-form ion-list {
+  background: transparent !important;
+}
+.contact-form ion-item {
+  --background: transparent;
+  background: transparent;
+}
+.contact-form ion-input,
+.contact-form ion-textarea,
+.contact-form ion-select {
+  --background: transparent;
+  background: transparent;
 }
