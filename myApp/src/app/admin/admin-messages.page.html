@@ -15,7 +15,13 @@
     <ion-chip color="success" *ngIf="hasHandled">
       Handled: <strong>&nbsp;{{ handledCount }}</strong>
     </ion-chip>
-    <ion-button color="danger" fill="outline" size="small" (click)="clearAll()" [disabled]="!messages.length">
+    <ion-button
+      color="danger"
+      fill="outline"
+      size="small"
+      (click)="clearAll()"
+      [disabled]="!messages.length"
+    >
       <ion-icon name="trash-outline" slot="start"></ion-icon>
       Clear All
     </ion-button>
@@ -31,22 +37,39 @@
               <span class="email">{{ m.email }}</span>
             </div>
             <div class="meta">
-              <ion-badge [color]="m.handled ? 'success' : 'warning'">{{ m.handled ? 'Handled' : 'New' }}</ion-badge>
+              <ion-badge [color]="m.handled ? 'success' : 'warning'"
+                >{{ m.handled ? 'Handled' : 'New' }}</ion-badge
+              >
               <ion-badge color="tertiary">{{ m.topic }}</ion-badge>
-              <span class="date">{{ m.createdAt | date:'MMM d, y, h:mm a' }}</span>
+              <span class="date"
+                >{{ m.createdAt | date:'MMM d, y, h:mm a' }}</span
+              >
             </div>
           </div>
           <div class="subject">{{ m.subject }}</div>
           <div class="actions-row">
             <ion-button size="small" (click)="toggleExpand(m.id)">
-              <ion-icon [name]="expanded[m.id] ? 'chevron-up-outline' : 'chevron-down-outline'" slot="start"></ion-icon>
+              <ion-icon
+                [name]="expanded[m.id] ? 'chevron-up-outline' : 'chevron-down-outline'"
+                slot="start"
+              ></ion-icon>
               {{ expanded[m.id] ? 'Hide' : 'View' }}
             </ion-button>
-            <ion-button size="small" color="success" fill="outline" (click)="toggleHandled(m)">
+            <ion-button
+              size="small"
+              color="success"
+              fill="outline"
+              (click)="toggleHandled(m)"
+            >
               <ion-icon name="checkmark-done-outline" slot="start"></ion-icon>
               {{ m.handled ? 'Mark Unhandled' : 'Mark Handled' }}
             </ion-button>
-            <ion-button size="small" color="danger" fill="clear" (click)="remove(m)">
+            <ion-button
+              size="small"
+              color="danger"
+              fill="clear"
+              (click)="remove(m)"
+            >
               <ion-icon name="trash-outline"></ion-icon>
             </ion-button>
           </div>

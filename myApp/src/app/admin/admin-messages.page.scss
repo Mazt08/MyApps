@@ -34,9 +34,22 @@
   justify-content: space-between;
   gap: 10px;
 }
-.who { display: flex; align-items: center; gap: 10px; }
-.who .email { color: #6b3b4e; font-size: 12px; }
-.meta { display: inline-flex; gap: 8px; align-items: center; color: #6b3b4e; font-size: 12px; }
+.who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.who .email {
+  color: #6b3b4e;
+  font-size: 12px;
+}
+.meta {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: #6b3b4e;
+  font-size: 12px;
+}
 
 .subject {
   margin-top: 6px;
@@ -63,5 +76,10 @@
   margin-top: 18vh;
   opacity: 0.9;
 }
-.empty ion-icon { font-size: 48px; color: #c2185b; }
-.empty h3 { margin: 10px 0 4px; }
+.empty ion-icon {
+  font-size: 48px;
+  color: #c2185b;
+}
+.empty h3 {
+  margin: 10px 0 4px;
+}
