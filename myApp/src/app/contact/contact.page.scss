@@ -6,12 +6,8 @@
 .contact-content {
   --padding-start: 16px;
   --padding-end: 16px;
-  /* Lighter, subtle background to match other pages */
-  --background: linear-gradient(
-    180deg,
-    rgba(255, 182, 213, 0.06) 0%,
-    rgba(255, 182, 213, 0.03) 100%
-  );
+  /* Match cart page light pink gradient (no alpha to avoid dark tint) */
+  --background: linear-gradient(180deg, #ffe6f4 0%, #f9c9e3 45%, #f3b3d6 100%);
 }
 
 .hero {
@@ -28,12 +24,13 @@
 }
 
 .contact-form {
-  background: var(--app-surface-pink);
+  /* Use same translucent card feel as cart items */
+  background: rgba(249, 201, 227, 0.12);
   border-radius: 16px;
   padding: 12px 8px;
   margin: 12px 0 20px;
-  border: 1px solid rgba(231, 95, 168, 0.12);
-  box-shadow: 0 6px 16px rgba(231, 95, 168, 0.08);
+  border: 1px solid rgba(230, 160, 188, 0.35);
+  box-shadow: 0 3px 10px rgba(211, 107, 138, 0.1);
 }
 
 .form-item.invalid {
@@ -45,14 +42,13 @@
 }
 
 .actions ion-button {
-  /* Lighter CTA akin to cart’s tone */
-  --background: linear-gradient(90deg, #f8b6d5 0%, #f3a7cc 100%);
-  --background-activated: linear-gradient(90deg, #f8b6d5 0%, #f3a7cc 100%);
-  --background-focused: linear-gradient(90deg, #f8b6d5 0%, #f3a7cc 100%);
-  --color: #2b0a18;
+  /* Align with cart's gradient buttons */
+  --background: linear-gradient(90deg, #d36b8a 0%, #e186a7 100%);
+  --background-activated: linear-gradient(90deg, #c25a7a 0%, #d97394 100%);
+  --color: #000;
   font-weight: 600;
-  letter-spacing: 0.3px;
-  box-shadow: 0 4px 12px rgba(231, 95, 168, 0.18);
+  letter-spacing: 0.4px;
+  box-shadow: 0 4px 12px rgba(211, 107, 138, 0.35);
 }
 
 .helper {
@@ -62,12 +58,12 @@
 }
 
 .static-info {
-  background: var(--app-surface-pink);
+  background: rgba(249, 201, 227, 0.12);
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 24px;
-  border: 1px solid rgba(231, 95, 168, 0.12);
-  box-shadow: 0 6px 16px rgba(231, 95, 168, 0.08);
+  border: 1px solid rgba(230, 160, 188, 0.35);
+  box-shadow: 0 3px 10px rgba(211, 107, 138, 0.1);
 }
 .static-info h2 {
   margin-top: 0;
