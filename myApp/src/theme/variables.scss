@@ -3,36 +3,42 @@
 // You can adjust shades if you need darker/lighter variants later.
 
 :root {
-	/* Primary (brand pink) */
-	--ion-color-primary: #e75fa8;
-	--ion-color-primary-rgb: 231, 95, 168;
-	--ion-color-primary-contrast: #ffffff;
-	--ion-color-primary-contrast-rgb: 255, 255, 255;
-	--ion-color-primary-shade: #cf5595;
-	--ion-color-primary-tint: #eb70b1;
+  /* Primary (brand pink) */
+  --ion-color-primary: #e75fa8;
+  --ion-color-primary-rgb: 231, 95, 168;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #cf5595;
+  --ion-color-primary-tint: #eb70b1;
 
-	/* Secondary (soft blush) */
-	--ion-color-secondary: #f8b6d5;
-	--ion-color-secondary-rgb: 248, 182, 213;
-	--ion-color-secondary-contrast: #3a1c27;
-	--ion-color-secondary-contrast-rgb: 58, 28, 39;
-	--ion-color-secondary-shade: #daa0bb;
-	--ion-color-secondary-tint: #f9bed9;
+  /* Secondary (soft blush) */
+  --ion-color-secondary: #f8b6d5;
+  --ion-color-secondary-rgb: 248, 182, 213;
+  --ion-color-secondary-contrast: #3a1c27;
+  --ion-color-secondary-contrast-rgb: 58, 28, 39;
+  --ion-color-secondary-shade: #daa0bb;
+  --ion-color-secondary-tint: #f9bed9;
 
-	/* Tertiary (accent deep pink) */
-	--ion-color-tertiary: #ff71c1;
-	--ion-color-tertiary-rgb: 255, 113, 193;
-	--ion-color-tertiary-contrast: #2b0a18;
-	--ion-color-tertiary-contrast-rgb: 43, 10, 24;
-	--ion-color-tertiary-shade: #e062aa;
-	--ion-color-tertiary-tint: #ff7fc7;
+  /* Tertiary (accent deep pink) */
+  --ion-color-tertiary: #ff71c1;
+  --ion-color-tertiary-rgb: 255, 113, 193;
+  --ion-color-tertiary-contrast: #2b0a18;
+  --ion-color-tertiary-contrast-rgb: 43, 10, 24;
+  --ion-color-tertiary-shade: #e062aa;
+  --ion-color-tertiary-tint: #ff7fc7;
 
-	/* Success / Warning / Danger keep Ionic defaults (can customize later) */
+  /* Success / Warning / Danger keep Ionic defaults (can customize later) */
 }
 
 /* Utility gradient variable for reuse */
 :root {
-	--app-gradient-pink: linear-gradient(135deg, #ffb2dc 0%, #ff8bc9 40%, #ff6bb9 70%, #ff5fb4 100%);
-	--app-surface-pink: rgba(255, 182, 213, 0.18);
-	--app-surface-pink-strong: rgba(255, 182, 213, 0.32);
+  --app-gradient-pink: linear-gradient(
+    135deg,
+    #ffb2dc 0%,
+    #ff8bc9 40%,
+    #ff6bb9 70%,
+    #ff5fb4 100%
+  );
+  --app-surface-pink: rgba(255, 182, 213, 0.18);
+  --app-surface-pink-strong: rgba(255, 182, 213, 0.32);
 }

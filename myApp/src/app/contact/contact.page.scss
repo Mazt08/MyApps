@@ -6,6 +6,13 @@
 .contact-content {
   --padding-start: 16px;
   --padding-end: 16px;
+  /* Make the whole page background softly pink */
+  --background: linear-gradient(
+    180deg,
+    var(--app-surface-pink-strong) 0%,
+    rgba(255, 182, 213, 0.10) 50%,
+    var(--app-surface-pink-strong) 100%
+  );
 }
 
 .hero {
@@ -22,10 +29,11 @@
 }
 
 .contact-form {
-  background: var(--app-surface-pink);
+  background: var(--app-surface-pink-strong);
   border-radius: 16px;
   padding: 12px 8px;
   margin: 12px 0 20px;
+  border: 1px solid rgba(231, 95, 168, 0.18);
 }
 
 .form-item.invalid {
@@ -43,10 +51,11 @@
 }
 
 .static-info {
-  background: var(--app-surface-pink);
+  background: var(--app-surface-pink-strong);
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 24px;
+  border: 1px solid rgba(231, 95, 168, 0.18);
 }
 .static-info h2 {
   margin-top: 0;
