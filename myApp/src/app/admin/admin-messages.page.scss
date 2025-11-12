@@ -71,6 +71,43 @@
   padding: 10px;
 }
 
+.thread {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.bubble {
+  max-width: 85%;
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(230, 160, 188, 0.35);
+  padding: 8px 10px;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(211, 107, 138, 0.08);
+}
+.bubble.admin {
+  align-self: flex-end;
+  background: linear-gradient(180deg, #ffd1e9 0%, #f5a6cc 100%);
+  color: #5a2740;
+}
+.bubble .from {
+  font-weight: 600;
+  font-size: 12px;
+  color: #6b3b4e;
+}
+.bubble .from small {
+  font-weight: 400;
+  opacity: 0.8;
+}
+.bubble .text {
+  margin: 4px 0;
+}
+.bubble .time {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
 .empty {
   text-align: center;
   margin-top: 18vh;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import {
   IonHeader,
@@ -15,6 +15,7 @@ import {
   IonBadge,
   IonChip,
 } from '@ionic/angular/standalone';
+import { AlertController, ToastController } from '@ionic/angular';
 
 interface ContactMessage {
   id: number;
@@ -26,6 +27,14 @@ interface ContactMessage {
   message: string;
   handled?: boolean;
   createdAt?: number;
+  // Optional conversation fields (used for two-way messaging)
+  replies?: Array<{
+    id: number;
+    from: 'user' | 'admin';
+    text: string;
+    at: number;
+  }>;
+  lastReplyAt?: number;
 }
 
 @Component({
@@ -52,6 +61,8 @@ interface ContactMessage {
   styleUrls: ['./admin-messages.page.scss'],
 })
 export class AdminMessagesPage implements OnInit {
+  private alertCtrl = inject(AlertController);
+  private toastCtrl = inject(ToastController);
   messages: ContactMessage[] = [];
   expanded: Record<number, boolean> = {};
 
@@ -83,6 +94,53 @@ export class AdminMessagesPage implements OnInit {
   toggleHandled(msg: ContactMessage) {
     msg.handled = !msg.handled;
     this.save();
+  }
+
+  async reply(msg: ContactMessage) {
+    const alert = await this.alertCtrl.create({
+      header: 'Reply to ' + msg.email,
+      inputs: [
+        {
+          type: 'textarea',
+          name: 'reply',
+          placeholder: 'Type your reply...',
+        },
+      ],
+      buttons: [
+        { text: 'Cancel', role: 'cancel' },
+        {
+          text: 'Send',
+          handler: (data: any) => {
+            const text = (data?.reply || '').trim();
+            if (!text) return false;
+            const now = Date.now();
+            (msg as any).replies = (msg as any).replies || [];
+            (msg as any).replies.push({
+              id: now,
+              from: 'admin',
+              text,
+              at: now,
+            });
+            (msg as any).lastReplyAt = now;
+            msg.handled = true;
+            this.save();
+            this.presentToast('Reply sent (stored locally)');
+            this.expanded[msg.id] = true;
+            return true;
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  private async presentToast(message: string) {
+    const t = await this.toastCtrl.create({
+      message,
+      duration: 1800,
+      position: 'top',
+    });
+    t.present();
   }
 
   remove(msg: ContactMessage) {

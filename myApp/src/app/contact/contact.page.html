@@ -75,6 +75,12 @@
         ></ion-input>
       </ion-item>
 
+      <!-- Thread hint and reply toggle -->
+      <ion-item *ngIf="hasThread" class="form-item info-item">
+        <ion-label>Existing conversation found for this email.</ion-label>
+        <ion-toggle [(ngModel)]="replyMode">Reply to last thread</ion-toggle>
+      </ion-item>
+
       <ion-item
         class="form-item"
         [class.invalid]="f['topic'].touched && f['topic'].invalid"
@@ -140,6 +146,23 @@
       </p>
     </div>
   </form>
+
+  <!-- Conversation Thread -->
+  <div *ngIf="thread.length" class="thread">
+    <h3 class="thread-title">Conversation</h3>
+    <div
+      class="bubble"
+      *ngFor="let t of thread"
+      [class.me]="t.from==='user'"
+      [class.admin]="t.from==='admin'"
+    >
+      <div class="bubble-meta">
+        <span class="who">{{ t.from === 'user' ? 'You' : 'Admin' }}</span>
+        <span class="when">{{ t.at | date:'MMM d, y, h:mm a' }}</span>
+      </div>
+      <div class="text">{{ t.text }}</div>
+    </div>
+  </div>
 
   <div class="static-info">
     <h2>Other Ways</h2>

@@ -57,6 +57,15 @@
             </ion-button>
             <ion-button
               size="small"
+              color="primary"
+              fill="solid"
+              (click)="reply(m)"
+            >
+              <ion-icon name="paper-plane-outline" slot="start"></ion-icon>
+              Reply
+            </ion-button>
+            <ion-button
+              size="small"
               color="success"
               fill="outline"
               (click)="toggleHandled(m)"
@@ -76,6 +85,26 @@
           <div class="message" *ngIf="expanded[m.id]">
             <div class="phone" *ngIf="m.phone">📞 {{ m.phone }}</div>
             <p>{{ m.message }}</p>
+            <div class="thread" *ngIf="m.replies?.length">
+              <div class="bubble" [class.admin]="false">
+                <div class="from">
+                  From: {{ m.name }} <small>({{ m.email }})</small>
+                </div>
+                <div class="text">{{ m.message }}</div>
+                <div class="time">
+                  {{ m.createdAt | date:'MMM d, y, h:mm a' }}
+                </div>
+              </div>
+              <ng-container *ngFor="let r of m.replies">
+                <div class="bubble" [class.admin]="r.from === 'admin'">
+                  <div class="from">
+                    {{ r.from === 'admin' ? 'Admin' : m.name }}
+                  </div>
+                  <div class="text">{{ r.text }}</div>
+                  <div class="time">{{ r.at | date:'MMM d, y, h:mm a' }}</div>
+                </div>
+              </ng-container>
+            </div>
           </div>
         </ion-label>
       </ion-item>

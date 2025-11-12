@@ -100,7 +100,7 @@ export class LoginPage {
     if (lower === 'admin@gmail.com') {
       if (password === '@Admin123') {
         this.userProfile.setUser({
-          name: 'Admin',
+          name: 'Admin',  
           phone: '—',
           email: email!,
           avatarUrl: 'assets/icon/jay.png',

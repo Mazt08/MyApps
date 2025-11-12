@@ -57,6 +57,50 @@
   opacity: 0.9;
 }
 
+/* Thread styles */
+.thread {
+  background: rgba(249, 201, 227, 0.12);
+  border: 1px solid rgba(230, 160, 188, 0.35);
+  border-radius: 16px;
+  padding: 12px;
+  margin: 16px 0 24px;
+  box-shadow: 0 3px 10px rgba(211, 107, 138, 0.1);
+}
+.thread-title {
+  margin: 0 0 8px 0;
+  color: #c2185b;
+}
+.bubble {
+  max-width: 88%;
+  background: #ffe6f4;
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin: 8px 0;
+}
+.bubble.me {
+  margin-left: auto;
+  background: #ffd1f1;
+}
+.bubble.admin {
+  margin-right: auto;
+}
+.bubble-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #6b3b4e;
+  margin-bottom: 4px;
+}
+.bubble .text {
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+.info-item {
+  --background: rgba(249, 201, 227, 0.12);
+  border-radius: 12px;
+}
+
 .static-info {
   background: rgba(249, 201, 227, 0.12);
   border-radius: 16px;
