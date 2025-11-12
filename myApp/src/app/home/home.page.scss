@@ -1,35 +1,20 @@
 /* 🌸 Page Background */
 .home-content {
   --background: linear-gradient(180deg, #f5afd2 0%, #e77fae 100%);
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   padding-bottom: 40px;
+  display: block;
 }
 
-/* 🌸 Header & Toolbar */
-ion-toolbar {
-  --background: #ffffff; /* pure white */
-  --color: #000000; /* black text/icons */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+/* Ensure the products grid doesn't accidentally create a non-scrollable layout */
+.products-grid {
+  width: 100%;
+  display: block;
 }
 
-ion-header {
-  background-color: #f56ec1 !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-ion-toolbar ion-title {
-  color: #000000 !important;
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-  transition: color 0.3s ease;
-}
-
-ion-menu-button {
-  color: #000000 !important;
-  transition: transform 0.2s ease, color 0.3s ease;
-}
+/* 🌸 Header & Toolbar (inherit global pink gradient) */
+/* Remove local overrides that forced white header */
+/* Keep only subtle hover styling */
 
 ion-menu-button:hover {
   transform: scale(1.15);
@@ -48,7 +33,7 @@ ion-menu-button:hover {
 }
 
 .hero-section h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 32px;
   color: #d36b8a;
   margin-bottom: 8px;
@@ -56,7 +41,7 @@ ion-menu-button:hover {
 }
 
 .hero-section p {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 15px;
   color: #6d6d6d;
   max-width: 600px;
@@ -70,7 +55,7 @@ ion-menu-button:hover {
   box-shadow: 0 5px 15px rgba(211, 107, 138, 0.15);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   background: #f0e3e3;
-  overflow: hidden;
+  /* Remove overflow:hidden to avoid clipping internal scroll surfaces */
 }
 
 .product-card:hover {
@@ -91,7 +76,7 @@ ion-card-header {
 }
 
 ion-card-title {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 21px;
   color: #d36b8a;
   margin-top: 5px;
@@ -103,11 +88,23 @@ ion-card-subtitle {
 }
 
 ion-card-content {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
   color: #444;
   line-height: 1.5;
   text-align: center;
+}
+
+/* Featured chip styling */
+.featured-chip {
+  margin-top: 6px;
+  --background: #ffd1f1;
+  --color: #c25a7a;
+  font-weight: 600;
+}
+
+ion-grid {
+  width: 100%;
 }
 
 /* 🌸 Buttons */
@@ -125,19 +122,27 @@ ion-card-content {
   }
 }
 
+/* Match Product Detail pink gradient Add to Cart styling */
 ion-button[color="tertiary"] {
-  --background: #d36b8a;
+  --background: linear-gradient(90deg, #d36b8a 0%, #e186a7 100%);
+  --background-hover: linear-gradient(90deg, #c25a7a 0%, #d97394 100%);
   --background-activated: #c25a7a;
-  --color: #0f0101;
-  font-weight: 500;
+  --color: #000;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(211, 107, 138, 0.3);
+  box-shadow: 0 4px 12px rgba(211, 107, 138, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 ion-button[color="tertiary"]:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(211, 107, 138, 0.4);
+  box-shadow: 0 6px 18px rgba(211, 107, 138, 0.45);
+}
+
+ion-button[color="tertiary"]:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(211, 107, 138, 0.35);
 }
 
 ion-button[color="light"] {
@@ -156,7 +161,7 @@ ion-button[color="light"]:hover {
 
 /* 🩶 Auth Buttons (Sign In / Login) */
 .auth-button {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   margin-left: 10px;
   text-transform: none;
@@ -235,20 +240,4 @@ ion-button[color="tertiary"].auth-button {
   }
 }
 
-// Header styling
-ion-header {
-  ion-toolbar {
-    --background: #f9f9f9;
-    --color: #222;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-
-    ion-title {
-      font-weight: 600;
-      text-transform: capitalize;
-    }
-
-    ion-button {
-      font-size: 0.9rem;
-    }
-  }
-}
+/* Remove previous header styling block to avoid overriding global toolbar */

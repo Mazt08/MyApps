@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "git-initial-push",
+			"type": "shell",
+			"command": "git add -A; git commit -m \"feat: profile upload (data URL), cart HCI refinements (pink card, transparent summary), image resolver, product detail carousel, admin suite, routing fixes\"; git push origin master",
+			"args": [],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

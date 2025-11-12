@@ -88,24 +88,40 @@ export class LoginPage {
     return this.signupForm.controls;
   }
 
+  loginError: string | null = null;
+
   submitLogin() {
     if (this.loginForm.invalid) return;
-    const { email } = this.loginForm.value;
-    // For demo: treat login as success if email matches stored email
-    const current = this.userProfile.getUserSnapshot();
-    if (current.email && current.email === email) {
-      // Keep existing profile data
-      this.postAuthNavigate();
-    } else {
-      // Minimal profile for login-only (no signup yet)
-      this.userProfile.setUser({
-        name: 'User',
-        phone: '—',
-        email: email!,
-        avatarUrl: 'assets/icon/jay.png',
-      });
-      this.postAuthNavigate();
+    this.loginError = null;
+    const { email, password } = this.loginForm.value;
+    const lower = (email || '').toLowerCase();
+
+    // Admin credential check
+    if (lower === 'admin@gmail.com') {
+      if (password === '@Admin123') {
+        this.userProfile.setUser({
+          name: 'Admin',
+          phone: '—',
+          email: email!,
+          avatarUrl: 'assets/icon/jay.png',
+          isAdmin: true,
+        });
+        this.postAuthNavigate();
+      } else {
+        this.loginError = 'Invalid admin credentials';
+      }
+      return;
     }
+
+    // Regular user login (no password validation; demo only)
+    this.userProfile.setUser({
+      name: 'User',
+      phone: '—',
+      email: email!,
+      avatarUrl: 'assets/icon/jay.png',
+      isAdmin: false,
+    });
+    this.postAuthNavigate();
   }
 
   submitSignup() {
@@ -116,6 +132,7 @@ export class LoginPage {
       phone: phone!,
       email: email!,
       avatarUrl: 'assets/icon/jay.png',
+      isAdmin: false,
     });
     this.postAuthNavigate();
   }

@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="admin-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Users</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="newUser()">New</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let u of users">
+      <ion-label>
+        <h2>{{ u.name }} ({{ u.role }})</h2>
+        <p>{{ u.email }}</p>
+        <p>{{ u.active ? 'Active' : 'Inactive' }}</p>
+      </ion-label>
+      <ion-toggle
+        slot="end"
+        [(ngModel)]="u.active"
+        (ionChange)="userService.update(u.id,{active:u.active})"
+        >Active</ion-toggle
+      >
+      <ion-button fill="clear" slot="end" (click)="editUser(u)"
+        >Edit</ion-button
+      >
+      <ion-button fill="clear" color="danger" slot="end" (click)="remove(u)"
+        >Delete</ion-button
+      >
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="showForm" class="editor">
+    <h3>{{ editingId ? 'Edit User' : 'New User' }}</h3>
+    <ion-item>
+      <ion-input
+        label="Name"
+        label-placement="stacked"
+        [(ngModel)]="form.name"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        label="Email"
+        label-placement="stacked"
+        [(ngModel)]="form.email"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        label="Role"
+        label-placement="stacked"
+        [(ngModel)]="form.role"
+      >
+        <ion-select-option value="user">User</ion-select-option>
+        <ion-select-option value="admin">Admin</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-toggle [(ngModel)]="form.active">Active</ion-toggle>
+    </ion-item>
+    <div class="actions">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+      <ion-button (click)="save()">Save</ion-button>
+    </div>
+  </div>
+</ion-content>

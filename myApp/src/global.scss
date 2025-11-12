@@ -1,3 +1,15 @@
+/* Ionic core and utilities (required) */
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+@import "@ionic/angular/css/display.css";
+
 /* Global styles */
 
 /* Unified pink gradient header (matches cart page theme) */
@@ -13,8 +25,57 @@ ion-header ion-title {
   letter-spacing: 0.5px;
 }
 
+/* Reused animations (moved from app.component.scss) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 /* Ensure translucent headers still show gradient */
 ion-header.translucent ion-toolbar {
   --background: linear-gradient(90deg, #f5afd2 0%, #e77fae 100%);
   backdrop-filter: none;
+}
+
+/* Ensure all pages can scroll vertically (avoid forcing shadow part styles) */
+ion-content {
+  touch-action: pan-y; /* enable vertical pan on touch devices */
+  /* Ionic already manages internal scroll; forcing ::part(scroll) can break layout on some platforms */
+}
+
+/* Mobile inertia and safe overflow for the internal scroller in device emulation */
+ion-content::part(scroll) {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Allow document itself to scroll if a page accidentally blocks ion-content */
+body {
+  overflow-y: auto; /* fallback vertical scroll */
+}
+
+/* Safety: make sure the app shell can size correctly */
+html,
+body {
+  height: 100%;
+}
+ion-app,
+ion-router-outlet {
+  height: 100%;
 }

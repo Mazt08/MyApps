@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="admin-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Products</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="newProduct()">New</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="sort-bar">
+    <ion-label>Sort by</ion-label>
+    <ion-select [(ngModel)]="sortKey" (ionChange)="onChangeSort()">
+      <ion-select-option value="name">Name</ion-select-option>
+      <ion-select-option value="price">Price</ion-select-option>
+      <ion-select-option value="createdAt">Created</ion-select-option>
+    </ion-select>
+    <ion-segment [(ngModel)]="sortDir" (ionChange)="onChangeSort()">
+      <ion-segment-button value="asc">Asc</ion-segment-button>
+      <ion-segment-button value="desc">Desc</ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let p of products">
+      <ion-thumbnail slot="start">
+        <img [src]="p.image || 'assets/icon/favicon.png'" alt="" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ p.name }}</h2>
+        <p>
+          {{ p.category }} • {{ p.price === null ? 'Price Not Listed' : (p.price
+          | currency:'USD') }}
+        </p>
+      </ion-label>
+      <ion-toggle
+        slot="end"
+        [(ngModel)]="p.active"
+        (ionChange)="productService.update(p.id,{active:p.active})"
+        >Active</ion-toggle
+      >
+      <ion-button slot="end" fill="clear" (click)="editProduct(p)"
+        >Edit</ion-button
+      >
+      <ion-button slot="end" fill="clear" color="danger" (click)="remove(p)"
+        >Delete</ion-button
+      >
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="showForm" class="editor">
+    <h3>{{ editingId ? 'Edit Product' : 'New Product' }}</h3>
+    <ion-item>
+      <ion-input
+        label="Name"
+        label-placement="stacked"
+        [(ngModel)]="form.name"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        type="number"
+        label="Price (USD)"
+        label-placement="stacked"
+        [(ngModel)]="form.price"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        label="Category"
+        label-placement="stacked"
+        [(ngModel)]="form.category"
+      >
+        <ion-select-option *ngFor="let c of categories" [value]="c"
+          >{{ c }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        label="Image URL"
+        label-placement="stacked"
+        [(ngModel)]="form.image"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea
+        label="Description"
+        label-placement="stacked"
+        [(ngModel)]="form.description"
+        auto-grow="true"
+      ></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-toggle [(ngModel)]="form.featured">Featured</ion-toggle>
+    </ion-item>
+    <div class="actions">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+      <ion-button (click)="save()">Save</ion-button>
+    </div>
+  </div>
+</ion-content>

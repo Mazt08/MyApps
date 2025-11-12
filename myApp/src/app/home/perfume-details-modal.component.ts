@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   IonHeader,
   IonToolbar,
@@ -17,7 +18,15 @@ import { CartService } from '../services/cart.service';
   templateUrl: './perfume-details-modal.component.html',
   styleUrls: ['./perfume-details-modal.component.scss'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonContent],
+  imports: [
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonButton,
+    IonTitle,
+    IonContent,
+  ],
 })
 export class PerfumeDetailsModal {
   perfume: any;

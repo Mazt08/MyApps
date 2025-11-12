@@ -1,4 +1,3 @@
-/* 🌸 GLOBAL SETTINGS */
 * {
   font-family: "Playfair Display", serif;
   box-sizing: border-box;
@@ -8,9 +7,11 @@ body {
   background: radial-gradient(circle at top left, #fff6fa 0%, #ffe4ef 100%);
   color: #222;
   overflow-x: hidden;
+  /* Allow vertical page scroll as fallback */
+  overflow-y: auto;
 }
 
-/* 🌸 HEADER BACKGROUND - Glass Gradient */
+/* header background */
 .menu-header-bg {
   height: 320px;
   width: 360px;
@@ -30,6 +31,7 @@ body {
   position: relative;
   overflow: hidden;
   transition: transform 0.5s ease, box-shadow 0.5s ease;
+  pointer-events: none; /* ensure clicks pass through to buttons below */
 }
 
 .menu-header-bg::before {
@@ -48,12 +50,9 @@ body {
   pointer-events: none;
 }
 
-.menu-header-bg:hover {
-  transform: rotate(-8deg) scale(1.03);
-  box-shadow: 0 12px 45px rgba(255, 105, 170, 0.45);
-}
+/* hover removed to reduce CSS size */
 
-/* 🌸 HEADER CONTENT */
+/* header content */
 .header-content {
   position: absolute;
   top: 40px;
@@ -65,6 +64,7 @@ body {
   z-index: 2;
   color: #fff;
   animation: fadeIn 1s ease-in-out;
+  pointer-events: none; /* prevent overlay from blocking other clicks */
 }
 
 .profile-avatar {
@@ -96,10 +96,7 @@ body {
     0 10px 25px rgba(255, 105, 170, 0.5);
 }
 
-.header-content .developer img:hover {
-  transform: scale(1.1) rotate(3deg);
-  box-shadow: 0 0 25px rgba(255, 80, 150, 0.6);
-}
+/* removed img hover to reduce css size */
 
 .header-content .developer h2 {
   font-weight: 600;
@@ -113,6 +110,7 @@ body {
   margin-left: 8px;
   --padding-start: 4px;
   --padding-end: 4px;
+  pointer-events: auto; /* re-enable clicks for this button */
 }
 
 .header-content .developer .user-number {
@@ -130,16 +128,18 @@ body {
   filter: drop-shadow(0 0 8px rgba(255, 130, 190, 0.5));
 }
 
-/* 🌸 ACTION BUTTON */
+/* action button */
 .action-button {
   display: flex;
   justify-content: center;
   margin-top: 8px; /* raised higher */
   margin-bottom: 30px;
   width: 100%;
+  position: relative;
+  z-index: 5; /* ensure button is above header overlay */
+  pointer-events: auto;
 }
 
-/* Slightly tighter on very short screens */
 @media (max-height: 700px) {
   .action-button {
     margin-top: 0;
@@ -156,6 +156,8 @@ body {
   --box-shadow: 0 6px 15px rgba(255, 99, 155, 0.3);
   padding: 10px 25px;
   transition: all 0.3s ease;
+  pointer-events: auto;
+  z-index: 6;
 }
 
 .action-button ion-button:hover {
@@ -164,7 +166,7 @@ body {
   box-shadow: 0 8px 22px rgba(255, 99, 155, 0.45);
 }
 
-/* 🌸 MENU ITEMS */
+/* menu items */
 .menu-items {
   margin: 0;
   padding: 10px 0;
@@ -172,61 +174,74 @@ body {
   border-radius: 15px;
 }
 
-.menu-items ion-item {
-  padding: 13px 20px;
-  margin-bottom: 12px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.75);
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  backdrop-filter: blur(6px);
+ion-menu ion-content {
+  --background: #ffe6ef;
 }
 
-.menu-items ion-item:hover {
-  background: rgba(255, 174, 212, 0.25);
-  transform: translateX(4px);
-  box-shadow: 0 5px 12px rgba(255, 0, 179, 0.15);
+ion-menu ion-content::part(background),
+ion-menu ion-content::part(scroll) {
+  background: #ffe6ef;
 }
+
+.menu-items {
+  --background: #ffe6ef;
+}
+
+/* Menu items - revert to white cards */
+.menu-items ion-item {
+  /* Remove white card background */
+  --background: transparent;
+  --background-hover: rgba(255, 190, 203, 0.55);
+  --background-focused: rgba(255, 190, 203, 0.55);
+  --background-activated: rgba(255, 168, 188, 0.85);
+  --ripple-color: #ff8cb0;
+  --color: #c2185b; /* pink-ish text */
+  --border-color: transparent;
+  --inner-border-width: 0;
+  --border-width: 0;
+  --inner-box-shadow: none;
+  padding: 13px 20px;
+  margin: 0 12px 12px;
+  border-radius: 16px;
+  font-weight: 500;
+  box-shadow: none; /* no card shadow since it's transparent */
+  transition: transform 0.2s ease;
+}
+
+/* Let base light pink show through (no extra card layer) */
+.menu-items ion-item::part(native) {
+  background: transparent;
+  border: 1px solid rgba(255, 105, 170, 0.22);
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+/* removed hover slide to reduce size */
 
 .menu-items ion-icon {
   margin-right: 14px;
-  color: #202020;
-  font-size: 1.3rem;
+  color: #ff5da2; /* brighter pink icon */
+  font-size: 1.25rem;
 }
 
+/* removed icon hover transform */
+
+/* Active item: keep white, add pink left inset highlight */
 .menu-items .active {
-  border-left: 6px solid #ff4081;
-  color: #ff4081;
+  --background: transparent;
+  --color: #b01352;
   font-weight: 600;
-  background: rgba(255, 192, 230, 0.25);
-  padding-left: 18px;
-  box-shadow: inset 0 0 10px rgba(255, 64, 129, 0.15);
+}
+
+/* Active state: stronger glass pink and bolder border */
+.menu-items .active::part(native) {
+  background: rgba(255, 182, 193, 0.14);
+  border-color: #ff8cb0;
 }
 
 .menu-items .active ion-icon {
-  color: #ff4081;
+  color: #ff3e8c;
   transform: scale(1.15);
-  transition: transform 0.3s ease;
 }
 
-/* 🌸 Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+/* Animations moved to global.scss to reduce component CSS budget */

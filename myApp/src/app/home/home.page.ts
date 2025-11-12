@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
@@ -17,6 +17,8 @@ import {
   IonCardSubtitle,
   IonCardContent,
   IonToast,
+  IonChip,
+  IonBadge,
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import {
@@ -24,6 +26,10 @@ import {
   UserProfileService,
 } from '../services/user-profile.service';
 import { CartService } from '../services/cart.service';
+import { ProductService, Product } from '../services/product.service';
+import { ModalController } from '@ionic/angular/standalone';
+import { PerfumeDetailsModal } from './perfume-details-modal.component';
+import { ImageResolverService } from '../services/image-resolver.service';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +38,7 @@ import { CartService } from '../services/cart.service';
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     IonHeader,
     IonToolbar,
     IonButtons,
@@ -48,69 +55,75 @@ import { CartService } from '../services/cart.service';
     IonCardSubtitle,
     IonCardContent,
     IonToast,
+    IonChip,
+    IonBadge,
   ],
 })
 export class HomePage implements OnInit, OnDestroy {
-  perfumes = [
-    {
-      name: 'Amouré Elegance',
-      price: '₱899.00',
-      image: 'assets/icon/1.jpg',
-      description:
-        'A sophisticated blend of floral and woody notes — perfect for formal evenings.',
-    },
-    {
-      name: 'Amouré Bloom',
-      price: '₱799.00',
-      image: 'assets/icon/2.jpg',
-      description:
-        'A fresh floral scent that captures the essence of spring and youth.',
-    },
-    {
-      name: 'Amouré Noir',
-      price: '₱999.00',
-      image: 'assets/icon/3.jpg',
-      description:
-        'A deep, mysterious fragrance with notes of amber and musk ideal for night wear.',
-    },
-    {
-      name: 'Amouré Nuit',
-      price: '₱1,099.00',
-      image: 'assets/icon/4.jpg',
-      description:
-        'Intense and bold, a fragrance that leaves a lasting impression.',
-    },
-    {
-      name: 'Amouré Velvet',
-      price: '₱1,199.00',
-      image: 'assets/icon/5.jpg',
-      description: 'Soft, luxurious scent with hints of vanilla and amber.',
-    },
-    {
-      name: 'Amouré Fleur',
-      price: '₱899.00',
-      image: 'assets/icon/6.jpg',
-      description: 'Delicate floral fragrance perfect for everyday elegance.',
-    },
-  ];
+  defaultImage = 'assets/icon/jay.png';
+
+  sections: Array<{ title: string; items: Product[] }> = [];
+  private productsSub?: import('rxjs').Subscription;
 
   isToastOpen = false;
   toastMessage = '';
   private sub?: import('rxjs').Subscription;
   user: UserProfile | null = null;
 
+  private imageMap = new Map<string, string>();
+
   constructor(
     private router: Router,
     private userProfile: UserProfileService,
-    private cart: CartService
+    private cart: CartService,
+    private products: ProductService,
+    private modalCtrl: ModalController,
+    private imageResolver: ImageResolverService
   ) {}
 
   ngOnInit(): void {
     this.sub = this.userProfile.user$.subscribe((u) => (this.user = u));
+    this.productsSub = this.products.list$().subscribe((list) => {
+      const groups = new Map<string, Product[]>();
+      for (const p of list.filter((p) => p.active)) {
+        const cat = p.category || 'Other';
+        const arr = groups.get(cat) || [];
+        arr.push(p);
+        groups.set(cat, arr);
+      }
+      this.sections = Array.from(groups.entries()).map(([title, items]) => ({
+        title,
+        items,
+      }));
+
+      // Resolve first image for visible products
+      for (const item of list) {
+        if (!this.imageMap.has(item.id)) {
+          this.imageResolver
+            .resolveFirst(item.name)
+            .then((url) => {
+              if (url) this.imageMap.set(item.id, url);
+            })
+            .catch(() => {});
+        }
+      }
+    });
+  }
+
+  onImgError(ev: Event) {
+    const img = ev.target as HTMLImageElement;
+    if (img && img.src !== this.defaultImage) {
+      img.src = this.defaultImage;
+    }
+  }
+
+  getImage(item: Product): string {
+    return this.imageMap.get(item.id) || item.image || this.defaultImage;
   }
 
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
+    this.productsSub?.unsubscribe();
   }
 
   get isGuest(): boolean {
@@ -130,6 +143,23 @@ export class HomePage implements OnInit, OnDestroy {
     this.cart.addItem(perfumeName, 1);
     this.toastMessage = `${perfumeName} added to cart!`;
     this.isToastOpen = true;
+  }
+
+  async openDetails(item: Product) {
+    const modal = await this.modalCtrl.create({
+      component: PerfumeDetailsModal,
+      componentProps: {
+        perfume: {
+          name: item.name,
+          price: item.price,
+          image: item.image || this.defaultImage,
+          description: item.description || '',
+        },
+      },
+      breakpoints: [0, 0.5, 0.9],
+      initialBreakpoint: 0.9,
+    });
+    await modal.present();
   }
 
   // Sign-in/login header buttons removed

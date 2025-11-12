@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Order Complete</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="success-content ion-padding">
+  <div class="wrap">
+    <div class="icon-circle">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+    </div>
+    <h2>Thank you!</h2>
+    <p *ngIf="orderId">
+      Your order <strong>#{{ orderId }}</strong> was placed successfully.
+    </p>
+    <p *ngIf="!orderId">Your order was placed successfully.</p>
+    <div class="summary">
+      <div class="pill"><span>Items:</span> {{ itemsCount }}</div>
+      <div class="pill"><span>Total:</span> ₱{{ total | number:'1.0-0' }}</div>
+    </div>
+    <ion-button color="tertiary" expand="block" (click)="goHome()"
+      >Back to Home</ion-button
+    >
+  </div>
+</ion-content>

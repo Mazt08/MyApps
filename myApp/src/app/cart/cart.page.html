@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="light">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
@@ -43,7 +43,7 @@
       <ion-label>
         <h3>{{ item.name }}</h3>
         <p class="unit-price">
-          ₱{{ priceOf(item.name) | number:'1.0-0' }} each
+          ${{ priceOf(item.name) | number:'1.0-0' }} each
         </p>
         <div class="qty-row" aria-label="Quantity controls for {{ item.name }}">
           <ion-button
@@ -63,7 +63,8 @@
           >
         </div>
         <div class="line-subtotal" aria-label="Subtotal for {{ item.name }}">
-          ₱{{ lineTotal(item) | number:'1.0-0' }}
+          {{ priceOf(item.name) === 0 ? 'Price Not Listed' : ('$' +
+          (lineTotal(item) | number:'1.2-2')) }}
         </div>
       </ion-label>
       <ion-buttons slot="end">
@@ -83,16 +84,30 @@
     <div class="checkout-bar always" aria-label="Cart summary and actions">
       <div class="summary-block">
         <div class="summary-row">
-          <span>Items</span
-          ><strong>₱{{ selectedTotal() | number:'1.0-0' }}</strong>
+          <span>Items</span>
+          <strong>
+            {{ selectedTotal() === 0 ? '$0.00' : ('$' + (selectedTotal() |
+            number:'1.2-2')) }}
+          </strong>
         </div>
         <div class="summary-row">
-          <span>Shipping</span
-          ><strong>₱{{ shippingEstimate() | number:'1.0-0' }}</strong>
+          <span>Shipping</span>
+          <strong>${{ shippingEstimate() | number:'1.0-0' }}</strong>
         </div>
         <div class="summary-row grand">
-          <span>Total</span
-          ><strong>₱{{ totalWithShipping() | number:'1.0-0' }}</strong>
+          <span>Total</span>
+          <strong>
+            {{ totalWithShipping() === 0 ? '$0.00' : ('$' + (totalWithShipping()
+            | number:'1.2-2')) }}
+          </strong>
+        </div>
+        <div class="trust-row">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>Secure checkout</span>
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>Fast delivery</span>
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>COD available</span>
         </div>
       </div>
       <div class="actions">
@@ -109,4 +124,19 @@
       </div>
     </div>
   </ion-footer>
+  <!-- Mobile sticky CTA -->
+  <div class="mobile-cta" *ngIf="!isEmpty">
+    <div class="mobile-cta__total">
+      {{ totalWithShipping() === 0 ? '$0.00' : ('$' + (totalWithShipping() |
+      number:'1.2-2')) }}
+    </div>
+    <ion-button
+      size="default"
+      color="danger"
+      (click)="checkout()"
+      [disabled]="!selectedTotal()"
+    >
+      Checkout
+    </ion-button>
+  </div>
 </ion-content>

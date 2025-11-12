@@ -6,6 +6,7 @@ export interface UserProfile {
   phone: string;
   email: string;
   avatarUrl: string;
+  isAdmin?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -15,6 +16,7 @@ export class UserProfileService {
     phone: 'user_phone',
     email: 'user_email',
     avatar: 'user_avatar',
+    isAdmin: 'user_is_admin',
   } as const;
 
   private readonly defaultUser: UserProfile = {
@@ -22,6 +24,7 @@ export class UserProfileService {
     phone: '—',
     email: '',
     avatarUrl: 'assets/icon/jay.png',
+    isAdmin: false,
   };
 
   private userSubject = new BehaviorSubject<UserProfile>(
@@ -53,7 +56,9 @@ export class UserProfileService {
       const avatarUrl =
         localStorage.getItem(this.storageKeys.avatar) ||
         this.defaultUser.avatarUrl;
-      return { name, phone, email, avatarUrl };
+      const isAdminRaw = localStorage.getItem(this.storageKeys.isAdmin);
+      const isAdmin = isAdminRaw === 'true';
+      return { name, phone, email, avatarUrl, isAdmin };
     } catch {
       return this.defaultUser;
     }
@@ -65,6 +70,10 @@ export class UserProfileService {
       localStorage.setItem(this.storageKeys.phone, user.phone ?? '');
       localStorage.setItem(this.storageKeys.email, user.email ?? '');
       localStorage.setItem(this.storageKeys.avatar, user.avatarUrl ?? '');
+      localStorage.setItem(
+        this.storageKeys.isAdmin,
+        String(Boolean(user.isAdmin))
+      );
     } catch {
       // ignore storage errors (e.g., SSR or private mode)
     }

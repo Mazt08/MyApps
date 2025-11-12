@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Profile Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding profile-settings-content">
+  <form [formGroup]="form" (ngSubmit)="save()" novalidate>
+    <ion-list lines="none">
+      <ion-item class="avatar-row">
+        <ion-avatar slot="start">
+          <img
+            [src]="form.value.avatarUrl || 'assets/icon/jay.png'"
+            alt="Avatar"
+          />
+        </ion-avatar>
+        <ion-label>
+          <div class="avatar-hint">Profile Image (upload)</div>
+          <div class="avatar-actions">
+            <input
+              #fileInput
+              type="file"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              hidden
+            />
+            <ion-button size="small" color="danger" (click)="fileInput.click()">
+              <ion-icon name="image-outline" slot="start"></ion-icon>
+              Select Image
+            </ion-button>
+            <ion-button
+              size="small"
+              fill="clear"
+              color="medium"
+              (click)="clearAvatar()"
+              *ngIf="previewUrl || form.value.avatarUrl"
+            >
+              <ion-icon name="trash-outline" slot="start"></ion-icon>
+              Remove
+            </ion-button>
+            <div class="hint">PNG / JPG / WEBP • Max 512KB</div>
+            <div class="error" *ngIf="fileError">{{ fileError }}</div>
+          </div>
+          <div class="avatar-preview-info" *ngIf="form.value.avatarUrl">
+            Stored inline image (Data URL)
+          </div>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked"
+          >Name <span class="req">*</span></ion-label
+        >
+        <ion-input formControlName="name" placeholder="Your name"></ion-input>
+      </ion-item>
+      <div
+        class="error"
+        *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+      >
+        Minimum 2 characters required.
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input
+          type="email"
+          formControlName="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+        ></ion-input>
+      </ion-item>
+      <div
+        class="error"
+        *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+      >
+        Invalid email format.
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Phone</ion-label>
+        <ion-input
+          formControlName="phone"
+          placeholder="09xx xxx xxxx"
+          inputmode="tel"
+          autocomplete="tel"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="actions">
+      <ion-button
+        type="submit"
+        [disabled]="form.invalid || loading"
+        color="danger"
+      >
+        <ion-icon name="save-outline" slot="start"></ion-icon>
+        {{ loading ? 'Saving...' : 'Save Changes' }}
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

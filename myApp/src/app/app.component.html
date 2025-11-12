@@ -1,6 +1,6 @@
 <ion-app>
   <!-- Side Menu -->
-  <ion-menu menuId="main-menu" contentId="main">
+  <ion-menu menuId="main-menu" contentId="main" [disabled]="isLoginRoute">
     <ion-content>
       <div class="menu-header-bg"></div>
 
@@ -42,10 +42,12 @@
       </div>
 
       <div class="action-button" *ngIf="isGuest">
-        <ion-button routerLink="/login">
-          <ion-icon slot="start" name="log-in-outline"></ion-icon>
-          Sign In / Register
-        </ion-button>
+        <ion-menu-toggle auto-hide="true">
+          <ion-button (click)="navigateToLogin()" routerDirection="forward">
+            <ion-icon slot="start" name="log-in-outline"></ion-icon>
+            Sign In / Register
+          </ion-button>
+        </ion-menu-toggle>
       </div>
 
       <ion-list class="menu-items" lines="none">
@@ -57,6 +59,16 @@
           >
             <ion-icon name="home-outline" slot="start"></ion-icon>
             Home
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true" *ngIf="user?.isAdmin && !isGuest">
+          <ion-item
+            button
+            (click)="navigate('/admin')"
+            [class.active]="isActive('/admin')"
+          >
+            <ion-icon name="settings-outline" slot="start"></ion-icon>
+            Admin
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle auto-hide="true">
@@ -89,6 +101,16 @@
             Developers
           </ion-item>
         </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true" *ngIf="!isGuest">
+          <ion-item
+            button
+            (click)="navigate('/profile-settings')"
+            [class.active]="isActive('/profile-settings')"
+          >
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            Profile Settings
+          </ion-item>
+        </ion-menu-toggle>
         <ion-menu-toggle auto-hide="true">
           <ion-item
             button
@@ -104,6 +126,70 @@
           <ion-item button (click)="signOut()">
             <ion-icon name="log-out-outline"></ion-icon>
             Sign out
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Admin Management Menu: shown when pages use menu="admin-menu" -->
+  <ion-menu
+    menuId="admin-menu"
+    contentId="main"
+    side="start"
+    [disabled]="!user?.isAdmin || isLoginRoute"
+    [hidden]="!user?.isAdmin"
+  >
+    <ion-content>
+      <ion-list lines="none">
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
+            (click)="navigate('/admin')"
+            [class.active]="isActive('/admin')"
+          >
+            <ion-icon slot="start" name="speedometer-outline"></ion-icon>
+            Dashboard
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
+            (click)="navigate('/admin/orders')"
+            [class.active]="isActive('/admin/orders')"
+          >
+            <ion-icon slot="start" name="receipt-outline"></ion-icon>
+            Orders
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
+            (click)="navigate('/admin/products')"
+            [class.active]="isActive('/admin/products')"
+          >
+            <ion-icon slot="start" name="pricetags-outline"></ion-icon>
+            Products
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
+            (click)="navigate('/admin/reports')"
+            [class.active]="isActive('/admin/reports')"
+          >
+            <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
+            Reports
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item
+            button
+            (click)="navigate('/admin/users')"
+            [class.active]="isActive('/admin/users')"
+          >
+            <ion-icon slot="start" name="people-outline"></ion-icon>
+            Users
           </ion-item>
         </ion-menu-toggle>
       </ion-list>

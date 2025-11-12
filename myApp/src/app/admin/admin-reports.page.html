@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="admin-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Reports</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Summary</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Total Revenue: {{ totalRevenue | currency:'USD' }}</p>
+      <p>Total Orders: {{ totalOrders }}</p>
+      <p>Average Order Value: {{ avgOrder | currency:'USD' }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header>Orders by Day</ion-list-header>
+    <ion-item *ngFor="let d of byDay">
+      <ion-label>
+        <h2>{{ d.day }}</h2>
+        <p>{{ d.count }} orders • {{ d.revenue | currency:'USD' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

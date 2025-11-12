@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="admin-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Admin Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div class="stats-grid">
+    <div class="stat">
+      <h2>Total Revenue</h2>
+      <p>{{ totalRevenue | currency:'USD':'symbol' }}</p>
+    </div>
+    <div class="stat">
+      <h2>Total Orders</h2>
+      <p>{{ totalOrders }}</p>
+    </div>
+    <div class="stat">
+      <h2>Products</h2>
+      <p>{{ productsCount }}</p>
+    </div>
+    <div class="stat">
+      <h2>Users</h2>
+      <p>{{ usersCount }}</p>
+    </div>
+  </div>
+  <ion-list lines="none" class="quick-links">
+    <ion-item routerLink="/admin/products">Manage Products</ion-item>
+    <ion-item routerLink="/admin/orders">View Orders</ion-item>
+    <ion-item routerLink="/admin/users">Manage Users</ion-item>
+    <ion-item routerLink="/admin/reports">Reports</ion-item>
+  </ion-list>
+</ion-content>

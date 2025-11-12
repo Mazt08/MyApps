@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="admin-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Orders</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let o of orders">
+      <ion-label>
+        <h2>{{ o.id }}</h2>
+        <p>
+          {{ o.items.length }} items • {{ o.total | currency:'USD' }} • {{
+          o.createdAt | date:'short' }}
+        </p>
+        <p>Status: {{ o.status }}</p>
+      </ion-label>
+      <ion-select
+        interface="popover"
+        placeholder="Change Status"
+        (ionChange)="updateStatus(o, $event.detail.value)"
+      >
+        <ion-select-option value="placed">Placed</ion-select-option>
+        <ion-select-option value="paid">Paid</ion-select-option>
+        <ion-select-option value="shipped">Shipped</ion-select-option>
+        <ion-select-option value="completed">Completed</ion-select-option>
+        <ion-select-option value="cancelled">Cancelled</ion-select-option>
+      </ion-select>
+      <ion-button color="danger" fill="clear" slot="end" (click)="remove(o)"
+        >Delete</ion-button
+      >
+    </ion-item>
+  </ion-list>
+</ion-content>

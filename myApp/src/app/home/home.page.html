@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="light">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
@@ -7,7 +7,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding home-content">
+<ion-content
+  [fullscreen]="false"
+  class="ion-padding home-content"
+  force-overscroll="true"
+>
   <div class="hero-section">
     <h2>Discover Your Signature Scent</h2>
     <p>
@@ -15,34 +19,78 @@
     </p>
   </div>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col
-        size="12"
-        size-md="6"
-        size-lg="4"
-        *ngFor="let perfume of perfumes"
-      >
-        <ion-card class="product-card">
-          <img [src]="perfume.image" [alt]="perfume.name" />
-          <ion-card-header>
-            <ion-card-title>{{ perfume.name }}</ion-card-title>
-            <ion-card-subtitle>{{ perfume.price }}</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            {{ perfume.description }}
-            <ion-button
-              color="tertiary"
-              expand="block"
-              fill="solid"
-              (click)="addToCart(perfume.name)"
+  <ion-grid class="products-grid">
+    <ng-container *ngFor="let section of sections">
+      <ion-row class="section-header-row">
+        <ion-col size="12">
+          <h3 class="section-title">{{ section.title }}</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col
+          size="12"
+          size-md="6"
+          size-lg="4"
+          *ngFor="let item of section.items"
+        >
+          <ion-card
+            class="product-card"
+            (click)="openDetails(item)"
+            button="true"
+          >
+            <a
+              [routerLink]="['/product', item.id]"
+              (click)="$event.stopPropagation()"
+              class="img-link"
             >
-              Add to Cart
-            </ion-button>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+              <img
+                [src]="getImage(item)"
+                [alt]="item.name"
+                loading="lazy"
+                (error)="onImgError($event)"
+              />
+            </a>
+            <ion-card-header>
+              <ion-chip
+                color="tertiary"
+                *ngIf="item.featured"
+                class="featured-chip"
+              >
+                Featured
+              </ion-chip>
+              <ion-card-title>{{ item.name }}</ion-card-title>
+              <ion-card-subtitle>
+                <ng-container *ngIf="item.price === null; else hasPrice">
+                  <ion-badge color="warning">Price Not Listed</ion-badge>
+                </ng-container>
+                <ng-template #hasPrice>
+                  {{ item.price | currency:'USD' }}
+                </ng-template>
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-button
+                color="medium"
+                expand="block"
+                fill="outline"
+                [routerLink]="['/product', item.id]"
+                (click)="$event.stopPropagation()"
+              >
+                View Details
+              </ion-button>
+              <ion-button
+                color="tertiary"
+                expand="block"
+                fill="solid"
+                (click)="addToCart(item.name); $event.stopPropagation()"
+              >
+                Add to Cart
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ng-container>
   </ion-grid>
 
   <!-- ✅ Toast for live feedback -->
