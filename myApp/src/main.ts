@@ -59,6 +59,16 @@ addIcons({
   'chevron-forward-outline': chevronForwardOutline,
 });
 
+// Force initial load to Home if current URL is /login (e.g., stale tab)
+try {
+  const path = window.location.pathname + window.location.hash;
+  if (path.includes('/login')) {
+    const base = (document.getElementsByTagName('base')[0]?.getAttribute('href')) || '/';
+    const normalizedBase = base.endsWith('/') ? base : base + '/';
+    history.replaceState(null, '', normalizedBase + 'home');
+  }
+} catch {}
+
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
