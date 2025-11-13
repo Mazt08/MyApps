@@ -92,7 +92,7 @@ export class AppComponent implements OnInit, OnDestroy {
     await this.router.navigateByUrl('/profile-settings');
   }
 
-  signOut(): void {
+  async signOut(): Promise<void> {
     this.userProfile.setUser({
       name: 'Guest User',
       phone: '—',
@@ -101,8 +101,13 @@ export class AppComponent implements OnInit, OnDestroy {
       isAdmin: false,
     });
     try {
-      // Also close admin menu if it was open
-      this.menu.close('admin-menu');
+      await this.menu.close('admin-menu');
+    } catch {}
+    try {
+      await this.menu.close('main-menu');
+    } catch {}
+    try {
+      await this.router.navigateByUrl('/home', { replaceUrl: true });
     } catch {}
   }
 

@@ -24,6 +24,16 @@
   --inner-padding-end: 12px;
 }
 
+/* Allow buttons inside ion-label to receive clicks */
+.msg-card ion-label {
+  pointer-events: auto;
+}
+
+/* Enable interactions for buttons/controls placed inside ion-label */
+.msg-card ion-label {
+  pointer-events: auto;
+}
+
 .msg-card.handled {
   opacity: 0.8;
 }
