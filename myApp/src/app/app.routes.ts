@@ -9,6 +9,15 @@ const adminGuard: CanMatchFn = () => {
   return u.isAdmin ? true : router.createUrlTree(['/home']);
 };
 
+// Prevent authenticated users from opening the login page
+const guestOnlyGuard: CanMatchFn = () => {
+  const userSvc = inject(UserProfileService);
+  const router = inject(Router);
+  const u = userSvc.getUserSnapshot();
+  const isAuthed = !!u?.email && u.email.includes('@');
+  return isAuthed ? router.createUrlTree(['/home']) : true;
+};
+
 export const routes: Routes = [
   {
     path: '',
@@ -78,6 +87,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
+    canMatch: [guestOnlyGuard],
     loadComponent: () => import('./login/login.page').then((m) => m.LoginPage),
   },
   {
