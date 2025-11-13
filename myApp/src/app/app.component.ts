@@ -47,6 +47,7 @@ import { Router, RouterModule } from '@angular/router';
 export class AppComponent implements OnInit, OnDestroy {
   user: UserProfile | null = null;
   private sub?: import('rxjs').Subscription;
+  private loginNavRequested = false;
   private wheelHandler?: (e: WheelEvent) => void;
   private touchStartY: number | null = null;
   private touchMoveHandler?: (e: TouchEvent) => void;
@@ -61,6 +62,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.userProfile.user$.subscribe((u) => (this.user = u));
+    // If app cold-started on /login unintentionally (e.g. stale tab), push to home
+    setTimeout(() => {
+      try {
+        if (this.router.url.startsWith('/login') && !this.loginNavRequested) {
+          this.router.navigateByUrl('/home', { replaceUrl: true });
+        }
+      } catch {}
+    }, 0);
   }
 
   ngOnDestroy(): void {
@@ -184,6 +193,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   async navigateToLogin(): Promise<void> {
+    this.loginNavRequested = true;
     try {
       await this.menu.close('main-menu');
     } catch {}
